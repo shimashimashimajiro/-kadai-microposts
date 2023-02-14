@@ -1,0 +1,11 @@
+<% if current_user.checkfavorite?(micropost) %>
+      <%= form_with(model: current_user.favorites.find_by(micropost_id: @user.id), local: true, method: :delete) do |f| %>
+        <%= hidden_field_tag :micropost_id, @user.id %>
+        <%= f.submit 'Unfavorite', class: 'btn btn-danger btn-group' %>
+      <% end %>
+    <% else %>
+      <%= form_with(model: current_user.favorites.build, local: true) do |f| %>
+        <%= hidden_field_tag :micropost_id, @user.id %>
+        <%= f.submit 'Favorite', class: 'btn btn-primary btn-group' %>
+  <% end %>
+<% end %>
